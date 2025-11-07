@@ -20,19 +20,19 @@ def home():
 
 @app.route("/notice")
 def notice():
-    return render_template("notice.html")
+    return render_template("notice/notice.html")
 
 
 @app.route("/alert")
 def alert():
-    return render_template("alert.html")
+    return render_template("/alert/alert.html")
 
 
 @app.route("/task")
 def task():
-    return render_template("task.html")
+    return render_template("/task/task.html")
 
 
 @app.route("/study")
 def login():
-    return render_template("login.html")
+    return render_template("/study/study.html")
