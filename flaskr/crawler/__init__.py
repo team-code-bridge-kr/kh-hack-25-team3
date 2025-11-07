@@ -40,4 +40,14 @@ def school_schedule(driver: WebDriver):
     element = wait_select(driver, By.CLASS_NAME, "lds-wap")
 
     source = element.get_attribute("outerHTML")
+    driver.get(default_url)
+    return source
+
+
+def meal_contents(driver: WebDriver):
+    wait_select(driver, By.CLASS_NAME, "meal_icon").click()
+    element = wait_select(driver, By.CLASS_NAME, "meal_day_contents_wrapper")
+
+    source = element.get_attribute("outerHTML")
+    driver.get(default_url)
     return source

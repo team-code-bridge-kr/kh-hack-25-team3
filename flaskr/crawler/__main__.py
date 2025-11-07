@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.webdriver import WebDriver
 
 import time
 import os
@@ -35,9 +36,13 @@ def main():
 
     driver = login()
 
-    import riro_parts.school_schedule
+    from riro_parts.riro_util import wait_select
 
-    riro_parts.school_schedule.crawl(driver)
+    # 학사 일정
+    wait_select(driver, By.CLASS_NAME, "btn_sch_pc").click()
+    element = wait_select(driver, By.CLASS_NAME, "lds-wap")
+
+    source = element.get_attribute("outerHTML")
 
     # import msg_board
     # msg_board.crawl(driver)
