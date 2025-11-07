@@ -62,32 +62,33 @@
     <!-- 수행평가 리스트 -->
     <main class="task-list">
       {% for post in posts %}
-        <a href="{{ post.link }}" class="task-card-link" target="_blank">
-          <div class="task-card {% if post.status == '마감' %}completed{% elif post.status == '제출' %}completed{% else %}ongoing{% endif %}">
-            <div class="task-header">
-              <h3>{{ post.title }}</h3>
-              <span class="status {% if post.status == '마감' %}completed{% elif post.status == '제출' %}completed{% else %}ongoing{% endif %}">
-                {% if post.status == '마감' %}마감
-                {% elif post.status == '제출' %}제출 완료
-                {% else %}진행 중{% endif %}
-              </span>
-            </div>
-            <p>마감일: {{ post.date }}</p>
-            <p>담당: {{ post.teacher }} 선생님</p>
-          </div>
-        </a>
-      {% endfor %}
-      
-      {% if not posts %}
-        <div class="task-card">
+      <a href="{{ post.link }}" class="task-card-link" target="_blank">
+        <div
+          class="task-card {% if post.status == '마감' %}completed{% elif post.status == '제출' %}completed{% else %}ongoing{% endif %}"
+        >
           <div class="task-header">
-            <h3>수행평가가 없습니다</h3>
+            <h3>{{ post.title }}</h3>
+            <span
+              class="status {% if post.status == '마감' %}completed{% elif post.status == '제출' %}completed{% else %}ongoing{% endif %}"
+            >
+              {% if post.status == '마감' %}마감 {% elif post.status == '제출'
+              %}제출 완료 {% else %}진행 중{% endif %}
+            </span>
           </div>
-          <p>현재 등록된 수행평가가 없습니다.</p>
+          <p>마감일: {{ post.date }}</p>
+          <p>담당: {{ post.teacher }} 선생님</p>
         </div>
+      </a>
+      {% endfor %} {% if not posts %}
+      <div class="task-card">
+        <div class="task-header">
+          <h3>수행평가가 없습니다</h3>
+        </div>
+        <p>현재 등록된 수행평가가 없습니다.</p>
+      </div>
       {% endif %}
     </main>
-    
+
     <!-- 페이지네이션 -->
     <div class="pagination">
       <button onclick="setPage(1)">1</button>
@@ -101,26 +102,26 @@
       <button onclick="setPage(9)">9</button>
       <button onclick="setPage(10)">10</button>
     </div>
-    
+
     <script>
-    function setPage(page) {
+      function setPage(page) {
         const params = new URLSearchParams(window.location.search);
-        params.set('page', page);
+        params.set("page", page);
         window.location.search = params.toString();
-    }
+      }
     </script>
 
     <!--하단 네비게이션-->
     <nav class="bottom-nav">
-      <a href="home/home" class="nav-item">
+      <a href="/" class="nav-item">
         <span>홈</span>
       </a>
 
-      <a href="notice/notice" class="nav-item">
+      <a href="notice" class="nav-item">
         <span>공지</span>
       </a>
 
-      <a href="alert/alert" class="nav-item">
+      <a href="alert" class="nav-item">
         <span>알림</span>
       </a>
 
@@ -128,7 +129,7 @@
         <span>수행</span>
       </a>
 
-      <a href="study/study" class="nav-item">
+      <a href="study" class="nav-item">
         <span>학습</span>
       </a>
     </nav>

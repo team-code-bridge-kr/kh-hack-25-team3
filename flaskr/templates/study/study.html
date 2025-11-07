@@ -1,121 +1,120 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>학습자료 | KHHSLINK</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/study.css') }}">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>학습자료 | KHHSLINK</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/study.css') }}"
+    />
+  </head>
+  <body>
+    <!-- 상단 헤더 -->
+    <header class="header">
+      <div class="header-left logo">
+        <img src="logo.png" alt="로고" />
+      </div>
 
-  <!-- 상단 헤더 -->
-  <header class="header">
-    <div class="header-left logo">
-      <img src="logo.png" alt="로고">
-    </div>
-  
-    <h1 class="header-title">학습자료</h1>
-  
-    <div class="header-right mypage">
-      <a herf="mypage/mypage" class="mypage">
-        <img src="profile-icon.png" alt="마이페이지" class="profile-icon" />
+      <h1 class="header-title">학습자료</h1>
+
+      <div class="header-right mypage">
+        <a herf="mypage/mypage" class="mypage">
+          <img src="profile-icon.png" alt="마이페이지" class="profile-icon" />
+        </a>
+      </div>
+    </header>
+
+    <!-- 과목 필터 섹션 -->
+    <section class="filter-section">
+      <div class="search-bar">
+        <input type="text" placeholder="기출 검색 (예: 2023 수학)" />
+        <button class="search-btn">🔍</button>
+      </div>
+
+      <div class="filter-options">
+        <select id="subject-filter">
+          <option value="all">전체 과목</option>
+          <option value="korean">국어</option>
+          <option value="english">영어</option>
+          <option value="math">수학</option>
+          <option value="science">과학</option>
+          <option value="history">한국사</option>
+        </select>
+
+        <select id="year-filter">
+          <option value="all">전체 연도</option>
+          <option value="2024">2024</option>
+          <option value="2023">2023</option>
+          <option value="2022">2022</option>
+          <option value="2021">2021</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- 학습자료 리스트 -->
+    <main class="study-list">
+      <!-- 예시 카드 1 -->
+      <div class="study-card">
+        <div class="study-header">
+          <h3>[국어] 2024학년도 1학기 중간고사</h3>
+          <span class="file-type">PDF</span>
+        </div>
+        <p>출제: 국어과 / 등록일: 2024.05.10</p>
+        <div class="btn-area">
+          <button class="open-btn">열람</button>
+          <button class="download-btn">다운로드</button>
+        </div>
+      </div>
+
+      <!-- 예시 카드 2 -->
+      <div class="study-card">
+        <div class="study-header">
+          <h3>[수학] 2023학년도 기말고사</h3>
+          <span class="file-type">PDF</span>
+        </div>
+        <p>출제: 수학과 / 등록일: 2023.12.15</p>
+        <div class="btn-area">
+          <button class="open-btn">열람</button>
+          <button class="download-btn">다운로드</button>
+        </div>
+      </div>
+
+      <!-- 예시 카드 3 -->
+      <div class="study-card">
+        <div class="study-header">
+          <h3>[영어] 2022학년도 1학기 중간고사</h3>
+          <span class="file-type">PDF</span>
+        </div>
+        <p>출제: 영어과 / 등록일: 2022.05.07</p>
+        <div class="btn-area">
+          <button class="open-btn">열람</button>
+          <button class="download-btn">다운로드</button>
+        </div>
+      </div>
+    </main>
+
+    <!--하단 네비게이션-->
+    <nav class="bottom-nav">
+      <a href="/" class="nav-item">
+        <span>홈</span>
       </a>
-    </div>
-  </header>
-  
 
-  <!-- 과목 필터 섹션 -->
-  <section class="filter-section">
-    <div class="search-bar">
-      <input type="text" placeholder="기출 검색 (예: 2023 수학)" />
-      <button class="search-btn">🔍</button>
-    </div>
+      <a href="notice" class="nav-item">
+        <span>공지</span>
+      </a>
 
-    <div class="filter-options">
-      <select id="subject-filter">
-        <option value="all">전체 과목</option>
-        <option value="korean">국어</option>
-        <option value="english">영어</option>
-        <option value="math">수학</option>
-        <option value="science">과학</option>
-        <option value="history">한국사</option>
-      </select>
+      <a href="alert" class="nav-item">
+        <span>알림</span>
+      </a>
 
-      <select id="year-filter">
-        <option value="all">전체 연도</option>
-        <option value="2024">2024</option>
-        <option value="2023">2023</option>
-        <option value="2022">2022</option>
-        <option value="2021">2021</option>
-      </select>
-    </div>
-  </section>
+      <a href="/task" class="nav-item">
+        <span>수행</span>
+      </a>
 
-  <!-- 학습자료 리스트 -->
-  <main class="study-list">
-
-    <!-- 예시 카드 1 -->
-    <div class="study-card">
-      <div class="study-header">
-        <h3>[국어] 2024학년도 1학기 중간고사</h3>
-        <span class="file-type">PDF</span>
-      </div>
-      <p>출제: 국어과 / 등록일: 2024.05.10</p>
-      <div class="btn-area">
-        <button class="open-btn">열람</button>
-        <button class="download-btn">다운로드</button>
-      </div>
-    </div>
-
-    <!-- 예시 카드 2 -->
-    <div class="study-card">
-      <div class="study-header">
-        <h3>[수학] 2023학년도 기말고사</h3>
-        <span class="file-type">PDF</span>
-      </div>
-      <p>출제: 수학과 / 등록일: 2023.12.15</p>
-      <div class="btn-area">
-        <button class="open-btn">열람</button>
-        <button class="download-btn">다운로드</button>
-      </div>
-    </div>
-
-    <!-- 예시 카드 3 -->
-    <div class="study-card">
-      <div class="study-header">
-        <h3>[영어] 2022학년도 1학기 중간고사</h3>
-        <span class="file-type">PDF</span>
-      </div>
-      <p>출제: 영어과 / 등록일: 2022.05.07</p>
-      <div class="btn-area">
-        <button class="open-btn">열람</button>
-        <button class="download-btn">다운로드</button>
-      </div>
-    </div>
-
-  </main>
-
-  <!--하단 네비게이션-->
-  <nav class="bottom-nav">
-    <a href="home/home" class="nav-item">
-      <span>홈</span>
-    </a>
-  
-    <a href="notice/notice" class="nav-item">
-      <span>공지</span>
-    </a>
-  
-    <a href="alert/alert" class="nav-item">
-      <span>알림</span>
-    </a>
-  
-    <a href="/task" class="nav-item">
-      <span>수행</span>
-    </a>
-  
-    <a href="study/study" class="nav-item active">
-      <span>학습</span>
-    </a>
-  </nav>
-</body>
+      <a href="study" class="nav-item active">
+        <span>학습</span>
+      </a>
+    </nav>
+  </body>
 </html>
