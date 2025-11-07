@@ -36,7 +36,7 @@ def main():
 
     driver = login()
 
-    from riro_parts.riro_util import wait_select
+    from .riro_parts.riro_util import wait_select
 
     # 학사 일정
     wait_select(driver, By.CLASS_NAME, "btn_sch_pc").click()

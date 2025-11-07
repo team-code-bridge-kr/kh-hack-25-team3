@@ -21,8 +21,10 @@ def home():
 @app.route("/notice")
 def notice():
     flask_type = request.args.get("type")
-    page = request.args.get("page")
-    if not page:
+    page = request.args.get("page", "1")
+    try:
+        page = int(page)
+    except ValueError:
         page = 1
     notice, submit, end = crawler.notice(driver, page)
 
@@ -46,7 +48,25 @@ def alert():
 
 @app.route("/task")
 def task():
-    return render_template("/task/task.html")
+    flask_type = request.args.get("type")
+    page = request.args.get("page", "1")
+    try:
+        page = int(page)
+    except ValueError:
+        page = 1
+    notice, submit, end = crawler.task(driver, page)
+
+    posts = []
+    if flask_type == "notice":
+        posts = notice
+    elif flask_type == "submit":
+        posts = submit
+    elif flask_type == "end":
+        posts = end
+    else:
+        posts = notice + submit + end
+
+    return render_template("task/task.html", posts=posts, selected_type=flask_type)
 
 
 @app.route("/study")

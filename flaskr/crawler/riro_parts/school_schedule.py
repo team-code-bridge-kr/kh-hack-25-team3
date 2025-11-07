@@ -4,7 +4,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-from riro_parts.riro_util import wait_select
+from .riro_util import wait_select
 
 
 def crawl(driver: WebDriver):

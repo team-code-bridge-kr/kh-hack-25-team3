@@ -61,36 +61,54 @@
 
     <!-- 수행평가 리스트 -->
     <main class="task-list">
-      <!-- 수행평가 카드 1 -->
-      <div class="task-card ongoing">
-        <div class="task-header">
-          <h3>[과학] 효소 반응 속도 실험 보고서</h3>
-          <span class="status ongoing">진행 중</span>
+      {% for post in posts %}
+        <a href="{{ post.link }}" class="task-card-link" target="_blank">
+          <div class="task-card {% if post.status == '마감' %}completed{% elif post.status == '제출' %}completed{% else %}ongoing{% endif %}">
+            <div class="task-header">
+              <h3>{{ post.title }}</h3>
+              <span class="status {% if post.status == '마감' %}completed{% elif post.status == '제출' %}completed{% else %}ongoing{% endif %}">
+                {% if post.status == '마감' %}마감
+                {% elif post.status == '제출' %}제출 완료
+                {% else %}진행 중{% endif %}
+              </span>
+            </div>
+            <p>마감일: {{ post.date }}</p>
+            <p>담당: {{ post.teacher }} 선생님</p>
+          </div>
+        </a>
+      {% endfor %}
+      
+      {% if not posts %}
+        <div class="task-card">
+          <div class="task-header">
+            <h3>수행평가가 없습니다</h3>
+          </div>
+          <p>현재 등록된 수행평가가 없습니다.</p>
         </div>
-        <p>마감일: 11월 10일 (일)</p>
-        <p>담당: 김선생님</p>
-      </div>
-
-      <!-- 수행평가 카드 2 -->
-      <div class="task-card completed">
-        <div class="task-header">
-          <h3>[영어] 자기소개 영상 제출</h3>
-          <span class="status completed">제출 완료</span>
-        </div>
-        <p>마감일: 10월 30일 (수)</p>
-        <p>담당: 이선생님</p>
-      </div>
-
-      <!-- 수행평가 카드 3 -->
-      <div class="task-card ongoing">
-        <div class="task-header">
-          <h3>[국어] 고전문학 감상문</h3>
-          <span class="status ongoing">진행 중</span>
-        </div>
-        <p>마감일: 11월 12일 (화)</p>
-        <p>담당: 박선생님</p>
-      </div>
+      {% endif %}
     </main>
+    
+    <!-- 페이지네이션 -->
+    <div class="pagination">
+      <button onclick="setPage(1)">1</button>
+      <button onclick="setPage(2)">2</button>
+      <button onclick="setPage(3)">3</button>
+      <button onclick="setPage(4)">4</button>
+      <button onclick="setPage(5)">5</button>
+      <button onclick="setPage(6)">6</button>
+      <button onclick="setPage(7)">7</button>
+      <button onclick="setPage(8)">8</button>
+      <button onclick="setPage(9)">9</button>
+      <button onclick="setPage(10)">10</button>
+    </div>
+    
+    <script>
+    function setPage(page) {
+        const params = new URLSearchParams(window.location.search);
+        params.set('page', page);
+        window.location.search = params.toString();
+    }
+    </script>
 
     <!--하단 네비게이션-->
     <nav class="bottom-nav">
@@ -106,7 +124,7 @@
         <span>알림</span>
       </a>
 
-      <a href="task/task" class="nav-item active">
+      <a href="/task" class="nav-item active">
         <span>수행</span>
       </a>
 
