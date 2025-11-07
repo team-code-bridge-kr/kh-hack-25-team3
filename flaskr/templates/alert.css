@@ -1,0 +1,162 @@
+/* ===== 기본 설정 ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Pretendard', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+body {
+  background: #f5f5f7;
+  color: #1d1d1f;
+  padding-bottom: 80px;
+}
+
+/* ===== 상단 헤더 ===== */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  z-index: 100;
+}
+
+.header-left .logo {
+  height: 30px;
+}
+
+.header-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.header-right .mypage-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(0,0,0,0.1);
+  transition: 0.2s ease;
+}
+.header-right .mypage-icon:hover {
+  transform: scale(1.08);
+}
+
+/* ===== 플랫폼 탭 ===== */
+.platform-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  margin-top: 70px;
+  overflow-x: auto;
+}
+.tab {
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 14px;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: white;
+  cursor: pointer;
+  transition: 0.3s;
+  white-space: nowrap;
+}
+.tab.active {
+  background: #4A0E17;
+  color: white;
+  border-color: #4A0E17;
+}
+.tab:hover {
+  transform: translateY(-2px);
+}
+
+/* ===== 알림 리스트 ===== */
+.notification-list {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.notification-item {
+  display: flex;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: 0.3s ease;
+}
+.notification-item:hover {
+  transform: translateY(-3px);
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+}
+
+.platform-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: #ddd;
+  flex-shrink: 0;
+}
+
+.notification-content h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+.notification-content p {
+  font-size: 13px;
+  color: #555;
+}
+.notification-content .time {
+  display: block;
+  font-size: 12px;
+  color: #888;
+  margin-top: 6px;
+}
+
+/* ===== 하단 네비게이션 ===== */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.nav-item {
+  text-decoration: none;
+  font-size: 13px;
+  color: #666;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 0.2s;
+}
+.nav-item.active {
+  color: #4A0E17;
+  font-weight: 600;
+}
+.nav-item:hover {
+  transform: translateY(-3px);
+}

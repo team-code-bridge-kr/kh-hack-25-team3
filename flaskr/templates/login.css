@@ -1,0 +1,108 @@
+/* ===== 기본 설정 ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Pretendard', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body.login-body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f5f5f7;
+    color: #1d1d1f;
+  }
+  
+  .logo2 img {
+    height: 50px;
+    object-fit: contain;
+    cursor: pointer;
+  }
+
+  /* ===== 로그인 컨테이너 ===== */
+  .login-container {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  
+  .login-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #6A0C2C; /* 버건디 */
+    margin-bottom: 6px;
+  }
+  
+  .login-subtitle {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 24px;
+  }
+  
+  /* ===== 로그인 폼 ===== */
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  
+  .login-form input {
+    padding: 12px 14px;
+    font-size: 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    outline: none;
+    transition: 0.2s;
+  }
+  .login-form input:focus {
+    border-color: #6A0C2C;
+    box-shadow: 0 4px 12px rgba(106,12,44,0.2);
+  }
+  
+  /* ===== 로그인 버튼 ===== */
+  .login-btn {
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    background: #6A0C2C; /* 버건디 */
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .login-btn:hover {
+    background: #7B1034; /* 살짝 밝은 버건디 */
+    transform: translateY(-2px);
+  }
+  
+  /* ===== 링크 ===== */
+  .login-links {
+    margin-top: 18px;
+    font-size: 13px;
+    color: #555;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+  }
+  .login-links a {
+    color: #6A0C2C;
+    text-decoration: none;
+    transition: 0.2s;
+  }
+  .login-links a:hover {
+    text-decoration: underline;
+  }
+  

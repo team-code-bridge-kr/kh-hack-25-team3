@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>알림 | KHHSLINK</title>
+  <link rel="stylesheet" href="alert.css" />
+</head>
+<body>
+
+  <!--  상단 헤더 -->
+  <header class="header">
+    <div class="header-left">
+      <img src="logo.png" alt="로고" class="logo">
+    </div>
+
+    <h1 class="header-title">알림</h1>
+
+    <div class="header-right">
+      <a href="mypage.html">
+        <img src="mypage.png" alt="마이페이지" class="mypage-icon">
+      </a>
+    </div>
+  </header>
+
+  <!-- 플랫폼 탭 섹션 -->
+  <section class="platform-tabs">
+    <button class="tab active">전체</button>
+    <button class="tab">카카오톡</button>
+    <button class="tab">팀즈</button>
+    <button class="tab">메시지</button>
+  </section>
+
+  <!--  알림 목록 -->
+  <main class="notification-list">
+    <div class="notification-item kakao">
+      <div class="platform-icon kakao"></div>
+      <div class="notification-content">
+        <h3>카카오톡 알림 제목</h3>
+        <p>카카오톡에서 새로운 공지가 도착했습니다.</p>
+        <span class="time">2분 전</span>
+      </div>
+    </div>
+
+    <div class="notification-item teams">
+      <div class="platform-icon teams"></div>
+      <div class="notification-content">
+        <h3>팀즈 채널 메시지</h3>
+        <p>회의 일정이 변경되었습니다.</p>
+        <span class="time">1시간 전</span>
+      </div>
+    </div>
+
+    <div class="notification-item sms">
+      <div class="platform-icon sms"></div>
+      <div class="notification-content">
+        <h3>문자 메시지</h3>
+        <p>수행평가 알림: 내일 제출 마감입니다.</p>
+        <span class="time">어제</span>
+      </div>
+    </div>
+  </main>
+
+  <!--하단 네비게이션-->
+  <nav class="bottom-nav">
+    <a href="home.html" class="nav-item active"><span>홈</span></a>
+    <a href="notice.html" class="nav-item"><span>공지</span></a>
+    <a href="alert.html" class="nav-item"><span>알림</span></a>
+    <a href="task.html" class="nav-item"><span>수행</span></a>
+    <a href="study.html" class="nav-item"><span>학습</span></a>
+  </nav>
+
+</body>
+</html>
