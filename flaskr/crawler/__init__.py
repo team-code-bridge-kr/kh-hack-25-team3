@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.webdriver import WebDriver
+from selenium.webdriver.support.ui import WebDriverWait
 
 from crawler.riro_parts.riro_util import wait_select
 
@@ -70,17 +71,20 @@ def notice(driver: WebDriver, page):
     # ───────────────────────────────
     # 3️⃣ 각 행에서 필요한 데이터 추출
     # ───────────────────────────────
+    a = 0
     for row in rows:
-        try:
-            # link = row.find_element(By.TAG_NAME, "a").click()
-            # url = driver.current_url
-            # print(url)
-            #
-            # driver.back()
+        a += 1
+        print(f"testtest {a}")
+        print(rows)
+        print(row)
 
+        try:
             status = row.find_element(By.CSS_SELECTOR, ".rd_status").text.strip()
+            print(status)
             title_elem = row.find_element(By.CSS_SELECTOR, "td:nth-of-type(4) a")
+            print(title_elem)
             title = title_elem.text.strip()
+            print(title)
             # link = title_elem.get_attribute(
             #     "href"
             # )  # href가 javascript:bL(...)이면 그대로 가져오거나 파싱 가능
@@ -88,9 +92,27 @@ def notice(driver: WebDriver, page):
                 By.CSS_SELECTOR, "td:nth-of-type(6)"
             ).text.strip()
             date = row.find_element(By.CSS_SELECTOR, "td:nth-of-type(8)").text.strip()
+            print(date)
+            td = row.find_element(By.CSS_SELECTOR, "td[style*='text-align:left']")
+            td.find_element(By.TAG_NAME, "a").click()
+            time.sleep(3)
+            url = driver.current_url
+            print(url)
+
+            driver.get(
+                f"https://kyungheeboy.riroschool.kr/board_msg.php?club=index&action=list&Appwin=reload&db=1901&cate=&t_year=&sort=&uid=&page={page}&key=&key2=&s1=&s2=&s3="
+            )
+            print("test")
+
+            wait_select(driver, By.CLASS_NAME, "rd_board")
+
+            print("test2")
+
         except Exception:
+            print("건너뛰gi")
             continue  # 형식이 안 맞으면 건너뛰기
 
+        print("test3")
         post = {
             "title": title,
             "link": "",
@@ -98,6 +120,7 @@ def notice(driver: WebDriver, page):
             "date": date,
             # "link": "https://www.youtube.com/watch?v=bL_BL44u794",
         }
+        print("test4")
 
         if status == "알림":
             notice_html_list.append(post)
@@ -106,6 +129,7 @@ def notice(driver: WebDriver, page):
         elif status == "마감":
             end_html_list.append(post)
         # '마감' 등은 필요 없으면 무시
+        print("test5")
 
     driver.get(default_url)
     return notice_html_list, submit_html_list, end_html_list
