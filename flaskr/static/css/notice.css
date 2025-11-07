@@ -1,179 +1,211 @@
 /* ===== 기본 설정 ===== */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Pretendard', sans-serif;
-  }
-  body {
-    background: #f5f5f7;
-    color: #1d1d1f;
-    padding-bottom: 80px; /* 하단 네비게이션 공간 */
-  }
-  
-  /* ===== 상단 헤더 ===== */
-  .header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 60px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Pretendard", sans-serif;
+}
+body {
+  background: #f5f5f7;
+  color: #1d1d1f;
+  padding-bottom: 80px; /* 하단 네비게이션 공간 */
+}
+
+/* ===== 상단 헤더 ===== */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  z-index: 100;
+}
+
+.header-left .logo {
+  height: 25px;
+  object-fit: contain;
+}
+
+.header-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #7b1034; /* 버건디 */
+}
+
+.header-right .mypage-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: 0.2s ease;
+}
+.header-right .mypage-icon:hover {
+  transform: scale(1.08);
+}
+
+/* ===== 검색 영역 ===== */
+.search-section {
+  margin-top: 70px; /* 헤더 공간 확보 */
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+}
+.search-input {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  outline: none;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: 0.2s;
+}
+.search-input:focus {
+  border-color: #7b1034;
+}
+.search-filter {
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: 0.2s;
+}
+.search-filter:focus {
+  border-color: #7b1034;
+}
+
+/* ===== 공지/신청 탭 ===== */
+.notice-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 0 16px;
+  margin-top: 12px;
+  overflow-x: auto;
+}
+.tab-btn {
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: white;
+  cursor: pointer;
+  transition: 0.3s;
+  white-space: nowrap;
+}
+.tab-btn.active {
+  background: #7b1034;
+  color: white;
+  border-color: #7b1034;
+}
+.tab-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* ===== 공지 리스트 ===== */
+.notice-list {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.notice-item {
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: 0.3s ease;
+}
+.notice-item:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+.notice-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.notice-meta {
+  font-size: 12px;
+  color: #888;
+}
+
+/* ===== 하단 네비게이션 ===== */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.nav-item {
+  text-decoration: none;
+  font-size: 13px;
+  color: #666;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 0.2s;
+}
+.nav-item.active {
+  color: #7b1034;
+  font-weight: 600;
+}
+.nav-item:hover {
+  transform: translateY(-2px);
+  .pagination {
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 16px;
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-    z-index: 100;
+    gap: 6px;
+    margin: 20px 0;
+    font-family: sans-serif;
   }
-  
-  .header-left .logo {
-    height: 25px;
-    object-fit: contain;
-  }
-  
-  .header-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: #7B1034; /* 버건디 */
-  }
-  
-  .header-right .mypage-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid rgba(0,0,0,0.1);
-    transition: 0.2s ease;
-  }
-  .header-right .mypage-icon:hover {
-    transform: scale(1.08);
-  }
-  
-  /* ===== 검색 영역 ===== */
-  .search-section {
-    margin-top: 70px; /* 헤더 공간 확보 */
-    display: flex;
-    gap: 8px;
-    padding: 12px 16px;
-  }
-  .search-input {
-    flex: 1;
-    padding: 8px 12px;
-    border-radius: 12px;
-    border: 1px solid rgba(0,0,0,0.1);
-    outline: none;
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    transition: 0.2s;
-  }
-  .search-input:focus {
-    border-color: #7B1034;
-  }
-  .search-filter {
-    padding: 8px 12px;
-    border-radius: 12px;
-    border: 1px solid rgba(0,0,0,0.1);
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+
+  .pagination button {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    padding: 6px 12px;
     cursor: pointer;
-    transition: 0.2s;
+    border-radius: 4px;
+    transition: all 0.2s;
   }
-  .search-filter:focus {
-    border-color: #7B1034;
+
+  .pagination button:hover {
+    background-color: #f0f0f0;
   }
-  
-  /* ===== 공지/신청 탭 ===== */
-  .notice-tabs {
-    display: flex;
-    gap: 8px;
-    padding: 0 16px;
-    margin-top: 12px;
-    overflow-x: auto;
+
+  .pagination button.active {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
   }
-  .tab-btn {
-    padding: 6px 14px;
-    border-radius: 50px;
-    font-size: 14px;
-    border: 1px solid rgba(0,0,0,0.1);
-    background: white;
-    cursor: pointer;
-    transition: 0.3s;
-    white-space: nowrap;
+
+  .pagination .prev,
+  .pagination .next {
+    font-weight: bold;
   }
-  .tab-btn.active {
-    background: #7B1034;
-    color: white;
-    border-color: #7B1034;
-  }
-  .tab-btn:hover {
-    transform: translateY(-2px);
-  }
-  
-  /* ===== 공지 리스트 ===== */
-  .notice-list {
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .notice-item {
-    padding: 14px;
-    border-radius: 16px;
-    background: rgba(255,255,255,0.7);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(0,0,0,0.06);
-    transition: 0.3s ease;
-  }
-  .notice-item:hover {
-    transform: translateY(-2px);
-    background: rgba(255,255,255,0.9);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
-  }
-  .notice-title {
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-  .notice-meta {
-    font-size: 12px;
-    color: #888;
-  }
-  
-  /* ===== 하단 네비게이션 ===== */
-  .bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border-top: 1px solid rgba(0,0,0,0.06);
-  }
-  
-  .nav-item {
-    text-decoration: none;
-    font-size: 13px;
-    color: #666;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: 0.2s;
-  }
-  .nav-item.active {
-    color: #7B1034;
-    font-weight: 600;
-  }
-  .nav-item:hover {
-    transform: translateY(-2px);
-  }
-  
+}
+

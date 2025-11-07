@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import crawler
 
 app = Flask(__name__)
@@ -20,7 +20,23 @@ def home():
 
 @app.route("/notice")
 def notice():
-    return render_template("notice/notice.html")
+    flask_type = request.args.get("type")
+    page = request.args.get("page")
+    if not page:
+        page = 1
+    notice, submit, end = crawler.notice(driver, page)
+
+    posts = []
+    if flask_type == "notice":
+        posts = notice
+    elif flask_type == "submit":
+        posts = submit
+    elif flask_type == "end":
+        posts = end
+    else:
+        posts = notice + submit + end
+
+    return render_template("notice/notice.html", posts=posts, selected_type=flask_type)
 
 
 @app.route("/alert")

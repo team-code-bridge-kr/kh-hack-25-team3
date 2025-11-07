@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>공지 | KHHSLINK</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/notice.css') }}">
+  <script src="{{ url_for('static', filename='notice.js') }}" defer></script>
 </head>
 <body>
 
@@ -42,10 +43,35 @@
 
     <!-- 공지 / 신청 구분 탭 -->
   <div class="notice-tabs">
-    <a href="/notice?type=notice" class="tab-btn {% if current_type == 'notice' %}active{% endif %}">공지글</a>
-    <a href="/notice?type=application" class="tab-btn {% if current_type == 'application' %}active{% endif %}">신청글</a>
-    <a href="/notice?type=all" class="tab-btn {% if current_type == 'all' %}active{% endif %}">전체</a>
+        <!-- <<a href="{{url_for('notice',type='notice')}}"> -->
+        <button class="tab-btn {% if selected_type == 'notice' %}active{% endif %}"
+          onclick="updateQueryParam('type','notice')">공지글</button>
+        <!-- </a> -->
+        <!-- <a href="{{url_for('notice',type='all')}}"> -->
+        <button class="tab-btn {% if selected_type == 'all' %}active{% endif %}"
+          onclick="updateQueryParam('type','all')">전체</button>
+        <!-- </a> -->
+        <!-- <a href="{{url_for('notice',type='submit')}}"> -->
+        <button class="tab-btn {% if selected_type == 'submit' %}active{% endif %}"
+          onclick="updateQueryParam('type','submit')">신청글</button>
+
+        <button class="tab-btn {% if selected_type == 'end' %}active{% endif %}"
+          onclick="updateQueryParam('type','end')">마감</button>
+        <!-- </a> -->
   </div>
+  
+  <script>
+  /**
+   * 원하는 쿼리 파라미터만 바꾸고 나머지는 유지
+   * @param {string} key - 바꾸고 싶은 파라미터 이름
+   * @param {string|number} value - 바꾸고 싶은 값
+   */
+  function updateQueryParam(key, value) {
+      const url = new URL(window.location.href);
+      url.searchParams.set(key, value); // key에 해당하는 값만 변경
+      window.location.href = url.toString(); // 페이지 reload
+  }
+  </script>
 
   <!-- 공지 목록 -->
   <section class="notice-list">
@@ -55,8 +81,28 @@
         <p class="notice-meta">{{ post.teacher }} 선생님 · {{ post.date }}</p>
       </a>
     {% endfor %}
-  </section>
+  </section> 
 
+  <div class="pagination">
+    <button onclick="setPage(1)">1</button>
+    <button onclick="setPage(2)">2</button>
+    <button onclick="setPage(3)">3</button>
+    <button onclick="setPage(4)">4</button>
+    <button onclick="setPage(5)">5</button>
+    <button onclick="setPage(6)">6</button>
+    <button onclick="setPage(7)">7</button>
+    <button onclick="setPage(8)">8</button>
+    <button onclick="setPage(9)">9</button>
+    <button onclick="setPage(10)">10</button>
+  </div>
+
+  <script>
+  function setPage(page) {
+      const params = new URLSearchParams(window.location.search);
+      params.set('page', page);  // page 인자 변경
+      window.location.search = params.toString(); // 페이지 reload
+  }
+  </script>
  <!--하단 네비게이션-->
  <nav class="bottom-nav">
   <a href="home/home" class="nav-item">
