@@ -15,9 +15,9 @@ from dotenv import load_dotenv
 
 # .env 파일을 여러 경로에서 찾기
 env_paths = [
-    os.path.join(os.path.dirname(__file__), '.env'),  # flaskr/crawler/.env
-    os.path.join(os.path.dirname(__file__), '..', '..', '.env'),  # 프로젝트 루트/.env
-    os.path.join(os.path.dirname(__file__), '..', '.env'),  # flaskr/.env
+    os.path.join(os.path.dirname(__file__), ".env"),  # flaskr/crawler/.env
+    os.path.join(os.path.dirname(__file__), "..", "..", ".env"),  # 프로젝트 루트/.env
+    os.path.join(os.path.dirname(__file__), "..", ".env"),  # flaskr/.env
 ]
 
 for env_path in env_paths:
@@ -70,11 +70,11 @@ def meal_contents(driver: WebDriver):
 
 def notice(driver: WebDriver, page):
     """공지사항 크롤링 함수
-    
+
     Args:
         driver: Selenium WebDriver 인스턴스
         page: 페이지 번호
-        
+
     Returns:
         tuple: (notice_list, submit_list, end_list)
     """
@@ -102,30 +102,32 @@ def notice(driver: WebDriver, page):
         try:
             # 상태 추출
             status = row.find_element(By.CSS_SELECTOR, ".rd_status").text.strip()
-            
+
             # 제목 추출
             title_elem = row.find_element(By.CSS_SELECTOR, "td:nth-of-type(4) a")
             title = title_elem.text.strip()
-            
+
             # 선생님 추출
             teacher = row.find_element(
                 By.CSS_SELECTOR, "td:nth-of-type(6)"
             ).text.strip()
-            
+
             # 날짜 추출
             date = row.find_element(By.CSS_SELECTOR, "td:nth-of-type(8)").text.strip()
-            
+
             # 링크 URL 추출 (페이지 이동 없이 직접 추출)
             try:
-                link_elem = row.find_element(By.CSS_SELECTOR, "td[style*='text-align:left'] a")
-                
+                link_elem = row.find_element(
+                    By.CSS_SELECTOR, "td[style*='text-align:left'] a"
+                )
+
                 # href 속성 확인
                 href_value = link_elem.get_attribute("href") or ""
                 onclick_value = link_elem.get_attribute("onclick") or ""
-                
+
                 url = ""
                 uid = None
-                
+
                 # href에서 javascript:bL(...) 형태 파싱
                 # 예: javascript:bL(1,5038,0); 또는 javascript:bL('view', '5038', ...)
                 if href_value.startswith("javascript:"):
@@ -135,14 +137,18 @@ def notice(driver: WebDriver, page):
                         uid = match.group(1)
                     # bL('view', '5038', ...) 형태
                     else:
-                        match = re.search(r"bL\(['\"]view['\"],\s*['\"](\d+)['\"]", href_value)
+                        match = re.search(
+                            r"bL\(['\"]view['\"],\s*['\"](\d+)['\"]", href_value
+                        )
                         if match:
                             uid = match.group(1)
-                
+
                 # onclick에서 추출 시도
                 if not uid and onclick_value:
                     # bL('view', '5038', ...) 형태
-                    match = re.search(r"bL\(['\"]view['\"],\s*['\"](\d+)['\"]", onclick_value)
+                    match = re.search(
+                        r"bL\(['\"]view['\"],\s*['\"](\d+)['\"]", onclick_value
+                    )
                     if match:
                         uid = match.group(1)
                     # bL(1,5038,0) 형태
@@ -150,7 +156,7 @@ def notice(driver: WebDriver, page):
                         match = re.search(r"bL\([^,]+,\s*(\d+)", onclick_value)
                         if match:
                             uid = match.group(1)
-                
+
                 # uid를 찾았으면 실제 URL 생성
                 if uid:
                     url = f"https://kyungheeboy.riroschool.kr/board_msg.php?club=index&action=view&db=1901&page={page}&cate=&t_year=&sort=&uid={uid}&inum=0&key=&key2=&s1=&s2=&s3="
@@ -160,11 +166,15 @@ def notice(driver: WebDriver, page):
                     url = href_value
                     print(f"✅ 행 {idx} URL 추출 성공 (직접 URL): {url[:80]}...")
                 else:
-                    print(f"⚠️ 행 {idx} URL 추출 실패: uid를 찾을 수 없음 (href: {href_value[:50]}, onclick: {onclick_value[:50]})")
+                    print(
+                        f"⚠️ 행 {idx} URL 추출 실패: uid를 찾을 수 없음 (href: {href_value[:50]}, onclick: {onclick_value[:50]})"
+                    )
             except Exception as e:
                 # 링크 추출 실패 시 빈 문자열 유지
                 url = ""
-                print(f"❌ 링크 추출 실패 (행 {idx}): {type(e).__name__} - {str(e)[:50]}")
+                print(
+                    f"❌ 링크 추출 실패 (행 {idx}): {type(e).__name__} - {str(e)[:50]}"
+                )
 
             # 데이터 검증
             if not all([status, title, teacher, date]):
@@ -178,9 +188,11 @@ def notice(driver: WebDriver, page):
                 "teacher": teacher,
                 "date": date,
             }
-            
+
             # URL 저장 확인 로그
-            print(f"📝 행 {idx} 저장: title='{title[:30]}...', link='{url[:60] if url else '없음'}...', status='{status}'")
+            print(
+                f"📝 행 {idx} 저장: title='{title[:30]}...', link='{url[:60] if url else '없음'}...', status='{status}'"
+            )
 
             # 상태에 따라 분류
             if status == "알림":
@@ -203,19 +215,21 @@ def notice(driver: WebDriver, page):
     print(f"  - 알림: {len(notice_html_list)}개")
     print(f"  - 제출: {len(submit_html_list)}개")
     print(f"  - 마감: {len(end_html_list)}개")
-    print(f"  - 총계: {len(notice_html_list) + len(submit_html_list) + len(end_html_list)}개")
-    
+    print(
+        f"  - 총계: {len(notice_html_list) + len(submit_html_list) + len(end_html_list)}개"
+    )
+
     driver.get(default_url)
     return notice_html_list, submit_html_list, end_html_list
 
 
 def task(driver: WebDriver, page):
     """수행평가 크롤링 함수
-    
+
     Args:
         driver: Selenium WebDriver 인스턴스
         page: 페이지 번호
-        
+
     Returns:
         tuple: (notice_list, submit_list, end_list)
     """
@@ -229,7 +243,7 @@ def task(driver: WebDriver, page):
         table = driver.find_element(By.CLASS_NAME, "rd_board")
         rows = table.find_elements(By.CSS_SELECTOR, "tr")
         print(f"✅ 테이블 발견: {len(rows)}개 행")
-        
+
         # 첫 번째 행의 HTML 구조 확인
         if len(rows) > 0:
             first_row_html = rows[0].get_attribute("outerHTML")
@@ -247,7 +261,7 @@ def task(driver: WebDriver, page):
             page_source = driver.page_source[:2000]
             print(f"🔍 페이지 HTML (처음 2000자): {page_source}")
             raise Exception("테이블을 찾을 수 없습니다")
-    
+
     rows = table.find_elements(By.CSS_SELECTOR, "tr")
 
     notice_html_list = []
@@ -269,10 +283,10 @@ def task(driver: WebDriver, page):
             if ths:
                 print(f"🔍 [TASK] 행 {idx}는 헤더 행 - 건너뛰기")
                 continue
-            
+
             # 모든 td 요소 가져오기
             tds = row.find_elements(By.CSS_SELECTOR, "td")
-            
+
             # 두 번째 행(첫 번째 데이터 행)의 구조 확인 (디버깅)
             if idx == 2 and len(tds) > 0:
                 print(f"🔍 [TASK] 행 {idx} (첫 데이터 행) td 개수: {len(tds)}")
@@ -283,7 +297,7 @@ def task(driver: WebDriver, page):
                     print(f"    HTML: {td_html}")
                 row_html = row.get_attribute("outerHTML")[:1000]
                 print(f"🔍 [TASK] 행 {idx} 전체 HTML: {row_html}")
-            
+
             # 상태 추출 - 여러 방법 시도
             status = ""
             try:
@@ -292,7 +306,7 @@ def task(driver: WebDriver, page):
                 # 대체: 첫 번째 td에서 상태 찾기
                 if len(tds) > 0:
                     status = tds[0].text.strip()
-            
+
             # 제목 추출 - 여러 방법 시도
             title = ""
             try:
@@ -305,7 +319,7 @@ def task(driver: WebDriver, page):
                         if link_text and len(link_text) > 3:  # 의미있는 텍스트인지 확인
                             title = link_text
                             break
-                    
+
                     # 링크 텍스트가 없으면 링크가 있는 td의 전체 텍스트 사용
                     if not title and links:
                         try:
@@ -313,7 +327,7 @@ def task(driver: WebDriver, page):
                             title = parent_td.text.strip()
                         except:
                             pass
-                
+
                 # 링크에서 찾지 못했으면 td 텍스트에서 찾기
                 if not title:
                     # 일반적으로 제목은 2번째나 3번째 td에 있음 (portfolio.php 구조)
@@ -326,7 +340,7 @@ def task(driver: WebDriver, page):
                                 title = tds[2].text.strip()
                     elif len(tds) > 1:
                         title = tds[1].text.strip()
-                
+
                 # 여전히 없으면 모든 td에서 가장 긴 텍스트 찾기
                 if not title:
                     max_len = 0
@@ -335,27 +349,31 @@ def task(driver: WebDriver, page):
                         if len(td_text) > max_len and len(td_text) > 5:
                             title = td_text
                             max_len = len(td_text)
-                            
+
             except Exception as e:
                 print(f"⚠️ [TASK] 행 {idx} 제목 추출 실패: {e}")
                 # 마지막 시도: 모든 td 텍스트 조합
                 if len(tds) > 2:
                     title = tds[2].text.strip()
-            
+
             # 선생님 추출 - 여러 방법 시도
             teacher = ""
             try:
-                teacher = row.find_element(By.CSS_SELECTOR, "td:nth-of-type(6)").text.strip()
+                teacher = row.find_element(
+                    By.CSS_SELECTOR, "td:nth-of-type(6)"
+                ).text.strip()
             except:
                 if len(tds) > 5:
                     teacher = tds[5].text.strip()
                 elif len(tds) > 4:
                     teacher = tds[4].text.strip()
-            
+
             # 날짜 추출 - 여러 방법 시도
             date = ""
             try:
-                date = row.find_element(By.CSS_SELECTOR, "td:nth-of-type(8)").text.strip()
+                date = row.find_element(
+                    By.CSS_SELECTOR, "td:nth-of-type(8)"
+                ).text.strip()
             except:
                 if len(tds) > 7:
                     date = tds[7].text.strip()
@@ -363,13 +381,15 @@ def task(driver: WebDriver, page):
                     date = tds[6].text.strip()
                 elif len(tds) > 5:
                     date = tds[5].text.strip()
-            
+
             # 링크 URL 추출 (페이지 이동 없이 직접 추출)
             try:
                 # 여러 방법으로 링크 찾기
                 link_elem = None
                 try:
-                    link_elem = row.find_element(By.CSS_SELECTOR, "td[style*='text-align:left'] a")
+                    link_elem = row.find_element(
+                        By.CSS_SELECTOR, "td[style*='text-align:left'] a"
+                    )
                 except:
                     try:
                         # 모든 td에서 링크 찾기
@@ -378,15 +398,15 @@ def task(driver: WebDriver, page):
                             link_elem = links[0]
                     except:
                         pass
-                
+
                 if link_elem:
                     # href 속성 확인
                     href_value = link_elem.get_attribute("href") or ""
                     onclick_value = link_elem.get_attribute("onclick") or ""
-                    
+
                     url = ""
                     uid = None
-                    
+
                     # href에서 javascript:bL(...) 형태 파싱
                     # 예: javascript:bL(1,5038,0); 또는 javascript:bL('view', '5038', ...)
                     if href_value.startswith("javascript:"):
@@ -396,14 +416,18 @@ def task(driver: WebDriver, page):
                             uid = match.group(1)
                         # bL('view', '5038', ...) 형태
                         else:
-                            match = re.search(r"bL\(['\"]view['\"],\s*['\"](\d+)['\"]", href_value)
+                            match = re.search(
+                                r"bL\(['\"]view['\"],\s*['\"](\d+)['\"]", href_value
+                            )
                             if match:
                                 uid = match.group(1)
-                    
+
                     # onclick에서 추출 시도
                     if not uid and onclick_value:
                         # bL('view', '5038', ...) 형태
-                        match = re.search(r"bL\(['\"]view['\"],\s*['\"](\d+)['\"]", onclick_value)
+                        match = re.search(
+                            r"bL\(['\"]view['\"],\s*['\"](\d+)['\"]", onclick_value
+                        )
                         if match:
                             uid = match.group(1)
                         # bL(1,5038,0) 형태
@@ -411,27 +435,37 @@ def task(driver: WebDriver, page):
                             match = re.search(r"bL\([^,]+,\s*(\d+)", onclick_value)
                             if match:
                                 uid = match.group(1)
-                    
+
                     # uid를 찾았으면 실제 URL 생성 (portfolio.php 사용)
                     if uid:
                         url = f"https://kyungheeboy.riroschool.kr/portfolio.php?db=1551&action=view&uid={uid}&page={page}&cate=0&t_doc=0&key=&key2=&s1=&s2=&s3="
-                        print(f"✅ [TASK] 행 {idx} URL 추출 성공 (uid={uid}): {url[:80]}...")
+                        print(
+                            f"✅ [TASK] 행 {idx} URL 추출 성공 (uid={uid}): {url[:80]}..."
+                        )
                     elif href_value and not href_value.startswith("javascript:"):
                         # 일반 URL인 경우 그대로 사용
                         url = href_value
-                        print(f"✅ [TASK] 행 {idx} URL 추출 성공 (직접 URL): {url[:80]}...")
+                        print(
+                            f"✅ [TASK] 행 {idx} URL 추출 성공 (직접 URL): {url[:80]}..."
+                        )
                     else:
-                        print(f"⚠️ [TASK] 행 {idx} URL 추출 실패: uid를 찾을 수 없음 (href: {href_value[:50]}, onclick: {onclick_value[:50]})")
+                        print(
+                            f"⚠️ [TASK] 행 {idx} URL 추출 실패: uid를 찾을 수 없음 (href: {href_value[:50]}, onclick: {onclick_value[:50]})"
+                        )
                 else:
                     print(f"⚠️ [TASK] 행 {idx} 링크 요소를 찾을 수 없음")
             except Exception as e:
                 # 링크 추출 실패 시 빈 문자열 유지
                 url = ""
-                print(f"❌ [TASK] 링크 추출 실패 (행 {idx}): {type(e).__name__} - {str(e)[:50]}")
+                print(
+                    f"❌ [TASK] 링크 추출 실패 (행 {idx}): {type(e).__name__} - {str(e)[:50]}"
+                )
 
             # 데이터 검증
             if not all([status, title, teacher, date]):
-                print(f"[TASK] 행 {idx}: 필수 데이터 누락 - 건너뛰기 (status='{status}', title='{title}', teacher='{teacher}', date='{date}')")
+                print(
+                    f"[TASK] 행 {idx}: 필수 데이터 누락 - 건너뛰기 (status='{status}', title='{title}', teacher='{teacher}', date='{date}')"
+                )
                 continue
 
             # Post 딕셔너리 생성
@@ -441,9 +475,11 @@ def task(driver: WebDriver, page):
                 "teacher": teacher,
                 "date": date,
             }
-            
+
             # URL 저장 확인 로그
-            print(f"📝 [TASK] 행 {idx} 저장: title='{title[:30]}...', link='{url[:60] if url else '없음'}...', status='{status}'")
+            print(
+                f"📝 [TASK] 행 {idx} 저장: title='{title[:30]}...', link='{url[:60] if url else '없음'}...', status='{status}'"
+            )
 
             # 상태에 따라 분류
             if status == "알림":
@@ -466,7 +502,9 @@ def task(driver: WebDriver, page):
     print(f"  - 알림: {len(notice_html_list)}개")
     print(f"  - 제출: {len(submit_html_list)}개")
     print(f"  - 마감: {len(end_html_list)}개")
-    print(f"  - 총계: {len(notice_html_list) + len(submit_html_list) + len(end_html_list)}개")
-    
+    print(
+        f"  - 총계: {len(notice_html_list) + len(submit_html_list) + len(end_html_list)}개"
+    )
+
     driver.get(default_url)
     return notice_html_list, submit_html_list, end_html_list

@@ -72,3 +72,8 @@ def task():
 @app.route("/study")
 def login():
     return render_template("/study/study.html")
+
+
+@app.route("/mypage")
+def mypage():
+    return render_template("/mypage/mypage.html")
