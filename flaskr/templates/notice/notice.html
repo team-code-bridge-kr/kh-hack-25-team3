@@ -42,20 +42,20 @@
 
     <!-- 공지 / 신청 구분 탭 -->
   <div class="notice-tabs">
-  <a href="{{ url_for('notice', type='all') }}" class="tab-btn {% if current_type == 'all' %}active{% endif %}">전체</a>
-  <a href="{{ url_for('notice', type='notice') }}" class="tab-btn {% if current_type == 'notice' %}active{% endif %}">공지글</a>
-  <a href="{{ url_for('notice', type='application') }}" class="tab-btn {% if current_type == 'application' %}active{% endif %}">신청글</a>
+    <a href="/notice?type=notice" class="tab-btn {% if current_type == 'notice' %}active{% endif %}">공지글</a>
+    <a href="/notice?type=application" class="tab-btn {% if current_type == 'application' %}active{% endif %}">신청글</a>
+    <a href="/notice?type=all" class="tab-btn {% if current_type == 'all' %}active{% endif %}">전체</a>
   </div>
 
   <!-- 공지 목록 -->
   <section class="notice-list">
     {% for post in posts %}
-      <div href="{{ post.link }}" class="notice-item" target="_blank">
+      <a href="{{ post.link }}" class="notice-item" target="_blank">
         <h3 class="notice-title">{{ post.title }}</h3>
         <p class="notice-meta">{{ post.teacher }} 선생님 · {{ post.date }}</p>
       </a>
     {% endfor %}
-  </section> 
+  </section>
 
  <!--하단 네비게이션-->
  <nav class="bottom-nav">
