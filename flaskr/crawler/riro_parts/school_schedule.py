@@ -12,3 +12,4 @@ def crawl(driver: WebDriver):
     element = wait_select(driver, By.CLASS_NAME, "lds-wap")
 
     source = element.get_attribute("outerHTML")
+    return source
