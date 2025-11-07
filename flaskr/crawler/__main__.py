@@ -34,6 +34,14 @@ def main():
         return driver
 
     driver = login()
+
+    import riro_parts.school_schedule
+
+    riro_parts.school_schedule.crawl(driver)
+
+    # import msg_board
+    # msg_board.crawl(driver)
+
     # driver.find_element(By.CLASS_NAME, "btn_sch_pc").click()
     #
     # time.sleep(10)
