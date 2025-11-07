@@ -41,24 +41,21 @@
     </div>
 
     <!-- 공지 / 신청 구분 탭 -->
-    <div class="notice-tabs">
-      <button class="tab-btn active">공지글</button>
-      <button class="tab-btn">신청글</button>
-    </div>
+  <div class="notice-tabs">
+  <a href="{{ url_for('notice', type='all') }}" class="tab-btn {% if current_type == 'all' %}active{% endif %}">전체</a>
+  <a href="{{ url_for('notice', type='notice') }}" class="tab-btn {% if current_type == 'notice' %}active{% endif %}">공지글</a>
+  <a href="{{ url_for('notice', type='application') }}" class="tab-btn {% if current_type == 'application' %}active{% endif %}">신청글</a>
+  </div>
 
-    <!-- 공지 목록 -->
-    <section class="notice-list">
-      <div class="notice-item">
-        <h3 class="notice-title">2025학년도 2학기 중간고사 일정 안내</h3>
-        <p class="notice-meta">홍길동 선생님 · 2025-09-15</p>
-      </div>
-
-      <div class="notice-item">
-        <h3 class="notice-title">동아리 추가 모집 공고</h3>
-        <p class="notice-meta">이영희 선생님 · 2025-09-12</p>
-      </div>
-    </section>
-  </main>
+  <!-- 공지 목록 -->
+  <section class="notice-list">
+    {% for post in posts %}
+      <div href="{{ post.link }}" class="notice-item" target="_blank">
+        <h3 class="notice-title">{{ post.title }}</h3>
+        <p class="notice-meta">{{ post.teacher }} 선생님 · {{ post.date }}</p>
+      </a>
+    {% endfor %}
+  </section> 
 
  <!--하단 네비게이션-->
  <nav class="bottom-nav">
