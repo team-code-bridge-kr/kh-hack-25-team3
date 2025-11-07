@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>마이페이지 | KHHSLINK</title>
+  <link rel="stylesheet" href="mypage.css">
+</head>
+<body>
+
+  <!-- 헤더 -->
+  <header class="header">
+    <div class="return">
+      <button onclick="goBack()">
+        뒤로가기
+      </button>
+      <script>function goBack() {
+        window.history.back();
+      } 
+      </script>
+    </div>
+    <div class="logo">마이페이지</div>
+    <div class="profile-icon"></div></div>
+   
+  </header>
+
+  <!-- 마이페이지 본문 -->
+  <main class="mypage-section">
+
+    <!-- 프로필 카드 -->
+    <section class="profile-card">
+      <div class="profile-img"></div>
+      <div class="profile-info">
+        <h2>홍길동</h2>
+        <p>2학년 3반 | 경희고등학교</p>
+      </div>
+    </section>
+
+    <!-- 계정 설정 -->
+    <section class="mypage-settings">
+      <h3>설정</h3>
+      <ul class="settings-list">
+        <li>프로필 수정</li>
+        <li>알림 설정</li>
+        <li>로그아웃</li>
+      </ul>
+    </section>
+
+  </main>
+
+</body>

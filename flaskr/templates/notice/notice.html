@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>공지 | KHHSLINK</title>
+  <link rel="stylesheet" href="notice.css" />
+</head>
+<body>
+
+   <!--  상단 헤더 -->
+   <header class="header">
+    <div class="header-left">
+      <a herf="mypage.html" class="mypage">
+        <img src="profile-icon.png" alt="마이페이지" class="profile-icon" />
+      </a>
+    </div>
+
+    <h1 class="header-title">공지</h1>
+
+    <div class="header-right">
+      <a href="mypage.html">
+        <img src="mypage.png" alt="마이페이지" class="mypage-icon">
+      </a>
+    </div>
+  </header>
+
+
+  <!-- 본문 -->
+  <main class="notice-body">
+    <!-- 검색 영역 -->
+    <div class="search-section">
+      <input type="text" placeholder="검색어를 입력하세요" class="search-input" />
+      <select class="search-filter">
+        <option value="all">전체</option>
+        <option value="title">제목</option>
+        <option value="teacher">선생님</option>
+      </select>
+    </div>
+
+    <!-- 공지 / 신청 구분 탭 -->
+    <div class="notice-tabs">
+      <button class="tab-btn active">공지글</button>
+      <button class="tab-btn">신청글</button>
+    </div>
+
+    <!-- 공지 목록 -->
+    <section class="notice-list">
+      <div class="notice-item">
+        <h3 class="notice-title">2025학년도 2학기 중간고사 일정 안내</h3>
+        <p class="notice-meta">홍길동 선생님 · 2025-09-15</p>
+      </div>
+
+      <div class="notice-item">
+        <h3 class="notice-title">동아리 추가 모집 공고</h3>
+        <p class="notice-meta">이영희 선생님 · 2025-09-12</p>
+      </div>
+    </section>
+  </main>
+
+ <!--하단 네비게이션-->
+ <nav class="bottom-nav">
+  <a href="home.html" class="nav-item">
+    <span>홈</span>
+  </a>
+
+  <a href="notice.html" class="nav-item active">
+    <span>공지</span>
+  </a>
+
+  <a href="alert.html" class="nav-item">
+    <span>알림</span>
+  </a>
+
+  <a href="task.html" class="nav-item">
+    <span>수행</span>
+  </a>
+
+  <a href="study.html" class="nav-item">
+    <span>학습</span>
+  </a>
+</nav>
+
+</body>
+</html>

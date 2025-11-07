@@ -38,6 +38,7 @@ body {
   left: 50%;
   transform: translateX(-50%);
   font-size: 18px;
+  color :#7B1034;
   font-weight: 600;
 }
 
@@ -72,9 +73,9 @@ body {
   white-space: nowrap;
 }
 .tab.active {
-  background: #4A0E17;
+  background: #7B1034;
   color: white;
-  border-color: #4A0E17;
+  border-color: #7B1034;
 }
 .tab:hover {
   transform: translateY(-2px);

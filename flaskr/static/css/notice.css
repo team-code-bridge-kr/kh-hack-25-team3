@@ -8,114 +8,172 @@
   body {
     background: #f5f5f7;
     color: #1d1d1f;
-    min-height: 100vh;
-    padding-bottom: 40px;
+    padding-bottom: 80px; /* 하단 네비게이션 공간 */
   }
   
   /* ===== 상단 헤더 ===== */
   .header {
     position: fixed;
     top: 0;
-    left: 0;
     width: 100%;
     height: 60px;
-    padding: 0 16px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    background: rgba(255, 255, 255, 0.6);
+    justify-content: space-between;
+    padding: 0 16px;
+    background: rgba(255,255,255,0.6);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid rgba(0,0,0,0.06);
     z-index: 100;
   }
-  .header .logo {
+  
+  .header-left .logo {
+    height: 25px;
+    object-fit: contain;
+  }
+  
+  .header-title {
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 600;
     color: #7B1034; /* 버건디 */
   }
-  .header .profile-icon {
-    width: 36px;
-    height: 36px;
+  
+  .header-right .mypage-icon {
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    background: linear-gradient(180deg, #7B1034, #A93B57);
+    object-fit: cover;
     border: 1px solid rgba(0,0,0,0.1);
-    cursor: pointer;
-    transition: transform 0.2s ease;
+    transition: 0.2s ease;
   }
-  .header .profile-icon:hover {
+  .header-right .mypage-icon:hover {
     transform: scale(1.08);
   }
   
-  /* ===== 마이페이지 본문 ===== */
-  .mypage-section {
-    padding: 80px 16px 16px 16px;
+  /* ===== 검색 영역 ===== */
+  .search-section {
+    margin-top: 70px; /* 헤더 공간 확보 */
     display: flex;
-    flex-direction: column;
-    gap: 24px;
-    max-width: 500px;
-    margin: 0 auto;
+    gap: 8px;
+    padding: 12px 16px;
   }
-  
-  /* ===== 프로필 카드 ===== */
-  .profile-card {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 16px;
-    border-radius: 16px;
+  .search-input {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.1);
+    outline: none;
     background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1px solid rgba(0,0,0,0.06);
-    transition: 0.3s ease;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: 0.2s;
   }
-  .profile-card:hover {
-    background: rgba(255,255,255,0.85);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+  .search-input:focus {
+    border-color: #7B1034;
   }
-  .profile-img {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background: linear-gradient(180deg, #7B1034, #A93B57);
-    border: 2px solid rgba(0,0,0,0.1);
+  .search-filter {
+    padding: 8px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    cursor: pointer;
+    transition: 0.2s;
   }
-  .profile-info h2 {
-    font-size: 18px;
-    font-weight: 700;
-    color: #1d1d1f;
-  }
-  .profile-info p {
-    font-size: 13px;
-    color: #555;
-    margin-top: 4px;
+  .search-filter:focus {
+    border-color: #7B1034;
   }
   
-  /* ===== 설정 섹션 ===== */
-  .mypage-settings h3 {
-    font-size: 16px;
-    font-weight: 600;
-    color: #7B1034;
-    margin-bottom: 12px;
+  /* ===== 공지/신청 탭 ===== */
+  .notice-tabs {
+    display: flex;
+    gap: 8px;
+    padding: 0 16px;
+    margin-top: 12px;
+    overflow-x: auto;
   }
-  .settings-list {
-    list-style: none;
+  .tab-btn {
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 14px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: white;
+    cursor: pointer;
+    transition: 0.3s;
+    white-space: nowrap;
+  }
+  .tab-btn.active {
+    background: #7B1034;
+    color: white;
+    border-color: #7B1034;
+  }
+  .tab-btn:hover {
+    transform: translateY(-2px);
+  }
+  
+  /* ===== 공지 리스트 ===== */
+  .notice-list {
+    padding: 16px;
     display: flex;
     flex-direction: column;
     gap: 12px;
   }
-  .settings-list li {
-    padding: 12px 16px;
-    border-radius: 12px;
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(12px);
+  
+  .notice-item {
+    padding: 14px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(0,0,0,0.06);
-    cursor: pointer;
-    transition: 0.2s ease;
+    transition: 0.3s ease;
   }
-  .settings-list li:hover {
-    background: rgba(255,255,255,0.85);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+  .notice-item:hover {
+    transform: translateY(-2px);
+    background: rgba(255,255,255,0.9);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+  }
+  .notice-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .notice-meta {
+    font-size: 12px;
+    color: #888;
+  }
+  
+  /* ===== 하단 네비게이션 ===== */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+  
+  .nav-item {
+    text-decoration: none;
+    font-size: 13px;
+    color: #666;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 0.2s;
+  }
+  .nav-item.active {
+    color: #7B1034;
+    font-weight: 600;
+  }
+  .nav-item:hover {
+    transform: translateY(-2px);
   }
   

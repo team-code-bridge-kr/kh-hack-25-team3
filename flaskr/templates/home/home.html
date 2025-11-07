@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KHHSLINK</title>
+  <link rel="stylesheet" href="home.css" />
+</head>
+<body>
+
+<!-- 상단 헤더 -->
+<header class="header">
+  <div class="logo">
+    <img src="logo.png" alt="logo" class="logo">
+  </div>
+
+  <div class="mypage">
+    <a href="mypage.html" class="mypage">
+      <img src="profile-icon.png" alt="마이페이지" class="profile-icon" />
+    </a>
+  </div>
+</header>
+
+
+  <!-- 오늘 요약 카드 -->
+  <section class="summary-card">
+    <div class="card">
+      <p class="card-title">TODAY</p>
+      <p class="card-text">오늘은 <span id="today-day">0</span>일 입니다</p>
+      <div class="card-row">
+        <div class="mini-card">📌 수행 <span id="task-count">0</span>개</div>
+        <div class="mini-card">📚 창체 <span id="activity-count">0</span>개</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 캘린더 -->
+  <section class="calendar-section">
+    <h2>캘린더</h2>
+    <div id="calendar"></div>
+  </section>
+
+  <!-- 급식 -->
+  <section class="meal-section">
+    <h2>오늘의 급식</h2>
+    <div id="meal-menu">불러오는 중...</div>
+  </section>
+
+  <!-- 하단 네비게이션 -->
+  <nav class="bottom-nav">
+    <a href="home.html" class="nav-item active"><span>홈</span></a>
+    <a href="notice.html" class="nav-item"><span>공지</span></a>
+    <a href="alert.html" class="nav-item"><span>알림</span></a>
+    <a href="task.html" class="nav-item"><span>수행</span></a>
+    <a href="study.html" class="nav-item"><span>학습</span></a>
+  </nav>
+
+  <script src="script.js"></script>
+</body>
+</html>

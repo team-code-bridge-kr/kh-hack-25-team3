@@ -14,7 +14,7 @@ def home():
     from datetime import date
 
     return render_template(
-        "home.html", calendar=calendar, meal=meal, day=date.today().day
+        "home/home.html", calendar=calendar, meal=meal, day=date.today().day
     )
 
 
