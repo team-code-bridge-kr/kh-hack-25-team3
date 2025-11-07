@@ -160,3 +160,144 @@
     transform: translateY(-3px);
   }
   
+  /* -------------------------
+   기본 레이아웃 & 폰트
+------------------------- */
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #fafafa;
+  margin: 0;
+  padding: 20px;
+}
+
+.lds-wap {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* -------------------------
+ 테이블 기본 스타일
+------------------------- */
+.calendar_table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.25); /* Liquid Glass 배경 */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.calendar_table td,
+.calendar_table th {
+  border: 1px solid rgba(200, 200, 200, 0.3);
+  text-align: center;
+  vertical-align: top;
+  padding: 5px;
+  position: relative;
+}
+
+/* -------------------------
+ 요일 헤더
+------------------------- */
+.tr_first td {
+  font-weight: 700;
+  background-color: #4B0B21; /* 버건디 포인트 */
+  color: #fff;
+  padding: 12px 0;
+}
+
+.tr_first td .sun {
+  color: #f44336; /* 일요일 강조 */
+}
+
+/* -------------------------
+ 날짜 박스
+------------------------- */
+.day {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.day_num {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* 오늘 날짜 강조 */
+.elem_td.today .day {
+  color: #4B0B21; /* 버건디 */
+  font-weight: 700;
+}
+
+/* -------------------------
+ 이벤트 박스 (.sel_box)
+------------------------- */
+.sel_box {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 5px;
+  margin-top: 5px;
+  min-height: 75px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px); /* Liquid Glass 효과 */
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+/* 마우스 오버 시 리퀴드 글라스 강조 */
+.sel_box:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* -------------------------
+ 이벤트 아이콘/텍스트
+------------------------- */
+.sch_elem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+
+.sch_elem img {
+  width: 14px;
+  height: 14px;
+}
+
+/* 색상 구분 */
+.neis_holiday span { color: #777; }
+.neis span { color: #0d6efd; } /* 파란색 */
+.school span { color: #198754; } /* 초록색 */
+
+/* -------------------------
+ 토요일/일요일 강조
+------------------------- */
+.day.sat { color: #0d6efd; }
+.day.sun { color: #f44336; }
+
+/* -------------------------
+ '더보기' 버튼
+------------------------- */
+.more {
+  display: block;
+  width: 100%;
+  text-align: right;
+  font-size: 10px;
+  color: #4B0B21; /* 버건디 */
+  cursor: pointer;
+}
+
+/* -------------------------
+ 스크롤바 숨김 (optional)
+------------------------- */
+.sel_box::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
